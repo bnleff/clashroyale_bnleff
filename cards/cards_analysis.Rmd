@@ -8,7 +8,14 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(sjPlot)
+library(kableExtra)
+library(knitr)
+library(scales)
+library(dplyr)
+library(forcats)
 ```
 
 ----
@@ -33,5 +40,36 @@ Now let's double check the data frame is correct now.
 ```{r}
 cards
 ```
+
+We must relevel the factors in order to understand the data better.
+
+```{r}
+cards$rarity <- cards$rarity %>% fct_relevel("Common", "Rare", "Epic", "Legendary")
+cards$type <- cards$type %>% fct_relevel("Troop", "Building", "Spell")
+```
+
+----
+
+# Univariate Analysis
+
+In order to understand the data better I will do quick plots to show the breakdown of the data.
+
+```{r}
+plot_frq(cards$rarity, title = "Clash Royale Card Rarities", ylim = c(0,40), axis.title = c("Rarities", "Frequency")) + scale_fill_brewer() + theme_grey()
+```
+
+As seen in the graph above, the highest proportion of cards in Clash Royale are Epic cards with 27 (28.7%) cards in the game. This is followed by Rare cards with 26 (27.7%), Common cards with 24 (25.5%), and lastly Legendary cards with 17 (18.1%).
+
+```{r}
+plot_frq(cards$type, title = "Clash Royale Card Types", ylim = c(0,80), axis.title = c("Types", "Frequency")) + scale_fill_brewer() + theme_grey()
+```
+
+As seen in the graph above, the highest proportion of cards in Clash Royale are Troop cards with 64 (68.1%) cards in the game. This is followed by Spell cards with 18 (19.1%) and Building cards with 12 (12.8%).
+
+
+
+
+
+
 
 ----
