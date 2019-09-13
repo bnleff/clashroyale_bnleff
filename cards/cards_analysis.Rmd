@@ -1,0 +1,37 @@
+---
+title: "cards_analysis"
+author: "Brandon Leff"
+date: "9/13/2019"
+output: 
+  html_document: 
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+----
+
+# Data Preparation
+
+First we must load in the data.
+
+```{r}
+cards <- readxl::read_excel("/Users/brandonleff/Desktop/clashroyale/clashroyale_bnleff/data/cards.xlsx")
+```
+
+Now we must change the data type for the `rarity` and `type` variables turning them into factors.
+
+```{r}
+cards$rarity <- factor(cards$rarity, labels = c("Common", "Epic", "Legendary", "Rare"))
+cards$type <- factor(cards$type, labels = c("Building", "Spell", "Troop"))
+```
+
+Now let's double check the data frame is correct now.
+
+```{r}
+cards
+```
+
+----
