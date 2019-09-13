@@ -66,7 +66,21 @@ plot_frq(cards$type, title = "Clash Royale Card Types", ylim = c(0,80), axis.tit
 
 As seen in the graph above, the highest proportion of cards in Clash Royale are Troop cards with 64 (68.1%) cards in the game. This is followed by Spell cards with 18 (19.1%) and Building cards with 12 (12.8%).
 
+```{r}
+plot_frq(cards$elixir, type = "histogram", show.mean = TRUE, ylim = c(0,30), title = "Clash Royale Card Elixir Cost", axis.title = c("Elixir Cost", "Frequency")) + scale_fill_brewer() + theme_grey()
+```
 
+As seen in the graph above, the distribution of elixir cost for cards in Clash Royale is Unimodal with a small skew to the right. There is one card with an elixir cost of 8 and one card with an elixir cost of 9 which affects the mean by dragging it right. The mean is 4 elixir with a standard deviation of 1.6 elixir.
+
+----
+
+# Bivariate Analysis
+
+Now I want to look into the breakdown of elixir cost within both rarity and type.
+
+```{r}
+cards %>% ggplot(aes(x=rarity, y=elixir, fill=rarity)) + geom_boxplot() + scale_fill_brewer(name="Rarity") + theme_grey() + stat_summary(fun.y="mean", geom="point", size=3, pch=17,color="orange") + labs(title = "Elixir Within Rarity", x = "Rarity", y = "Elixir")
+```
 
 
 
